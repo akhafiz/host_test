@@ -1,0 +1,12 @@
+<taglib>
+    <function>
+        <name>isAllowRole</name>
+        <function-class>akhafiz.web.SecurityUtil</function-class>
+        <function-signature>
+            boolean isAllowRole(java.lang.String)
+        </function-signature>
+        <description>
+            Return true if role is allow for user. Else false;
+        </description>
+    </function>
+</taglib>

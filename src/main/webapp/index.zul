@@ -1,0 +1,42 @@
+<?page title="Платные медицинские процедуры"?>
+<?taglib uri="/WEB-INF/security.tld" prefix="sec"?>
+<zk>
+	<window id="medicalProceduresWindow" title="Платные медицинские процедуры"
+			apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('akhafiz.web.MedicalProceduresViewModel')">
+
+		<caption>
+			<button label="Войти" if="${empty execution.userPrincipal}" href="/login.zul"/>
+			<button label="Выйти" if="${not empty execution.userPrincipal}" href="/logout"/>
+		</caption>
+
+		<hlayout>
+			Hello! <label value="${empty execution.userPrincipal.name?
+				'anonymous' : execution.userPrincipal.name }"/>
+		</hlayout>
+
+		<vbox>
+			<hbox>
+				<button label="Создать процедуру" onClick="@command('showCreateMedicalProcedurePopup')" visible="${sec:isAllowRole('ROLE_ADMIN')}"/>
+				<button label="Редактировать процедуру" onClick="@command('showEditMedicalProcedurePopup')" visible="${sec:isAllowRole('ROLE_ADMIN')}"/>
+				<button label="Удалить процедуру" onClick="@command('deleteMedicalProcedure')" visible="${sec:isAllowRole('ROLE_ADMIN')}"/>
+			</hbox>
+			<listbox id="medicalProcedureListBox" emptyMessage="Платных медицинских процедур нет"
+					 height="150px" model="@load(vm.medicalProcedureList)" selectedItem="@bind(vm.selectedMedicalProcedure)">
+				<listhead>
+					<listheader label="Название процедуры"/>
+					<listheader label="ФИО сотрудника"/>
+					<listheader label="Стоимость"/>
+					<listheader label="Номер кабинета"/>
+				</listhead>
+				<template name="model" var="medicalProcedure">
+					<listitem>
+						<listcell label="@load(medicalProcedure.name)"/>
+						<listcell label="@load(medicalProcedure.medicalOfficerFio)"/>
+						<listcell label="@load(medicalProcedure.price)"/>
+						<listcell label="@load(medicalProcedure.cabinetNumber)"/>
+					</listitem>
+				</template>
+			</listbox>
+		</vbox>
+	</window>
+</zk>

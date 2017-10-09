@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <security:http auto-config="true" use-expressions="true">
+        <security:intercept-url pattern="/index.zul" access="isAnonymous() or hasRole('ROLE_ADMIN')" />
+        <security:intercept-url pattern="/login.zul" access="permitAll"/>
+        <!-- secure pages -->
+
+        <security:form-login login-page="/login.zul" always-use-default-target="true" default-target-url="/index.zul"
+                    authentication-failure-url="/login.zul?login_error=1"/>
+
+        <security:logout logout-success-url="/index.zul" invalidate-session="true" />
+        <security:csrf disabled="true"/>
+    </security:http>
+
+    <security:authentication-manager>
+        <security:authentication-provider user-service-ref="hostUserDetailsService"/>
+    </security:authentication-manager>
+
+</beans>

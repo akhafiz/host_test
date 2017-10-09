@@ -1,0 +1,12 @@
+<window id="editMedicalProcedurePopup" title="Создание/Редактирование медицинской процедуры" border="normal" width="460px"
+        position="center,center" closable="true"
+        action="show: slideDown;hide: slideUp"
+        apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('akhafiz.web.MedicalProcedurePopupViewModel')">
+    <vbox align="start">
+        Название процедуры: <textbox id="procedureNameTextBox"  value="@bind(vm.currentMedicalProcedure.name)"/>
+        ФИО сотрудника: <textbox id="medicalOfficesFioTextBox"  value="@bind(vm.currentMedicalProcedure.medicalOfficerFio)"/>
+        Номер кабинета: <textbox id="cabinetNumberTextBox"  value="@bind(vm.currentMedicalProcedure.cabinetNumber)"/>
+        Стоимость: <decimalbox id="priceDecimalBox" value="@bind(vm.currentMedicalProcedure.price)"/>
+        <button id="changeMedicalProcedureBtn" label="Сохранить и закрыть" onClick="@command('saveAndClose')"/>
+    </vbox>
+</window>

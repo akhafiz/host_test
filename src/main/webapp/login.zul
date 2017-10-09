@@ -1,0 +1,16 @@
+<?page id="testZul" title="Платные медицинские процедуры"?>
+<window id="loginwin" title="Авторизация (Login: admin Password: admin)"  width="500px" border="normal">
+    <html:form name="f" action="login" method="POST" xmlns:html="native">
+        <grid>
+            <rows>
+                <row>User: <textbox id="u" name="username"/></row>
+                <row>Password: <textbox id="p" type="password" name="password"/></row>
+                <row spans="2">
+                    <hbox>
+                        <button type="submit" label="Войти" />
+                    </hbox>
+                </row>
+            </rows>
+        </grid>
+    </html:form>
+</window>
